@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>P. Busselaar Timmerman – Renovaties & Verbouwingen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:       #1a3a8f;
+      --blue-dark:  #122870;
+      --blue-light: #2a52c9;
+      --blue-pale:  #e8eef8;
+      --white:      #ffffff;
+      --gray-50:    #f9fafb;
+      --gray-100:   #f3f4f6;
+      --gray-200:   #e5e7eb;
+      --gray-500:   #6b7280;
+      --gray-700:   #374151;
+      --gray-900:   #111827;
+      --radius:     8px;
+      --radius-lg:  14px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--gray-900); overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 68px;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      box-shadow: 0 1px 8px rgba(0,0,0,.06);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--gray-900); text-decoration: none; letter-spacing: .01em;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a {
+      text-decoration: none; color: var(--gray-500);
+      font-size: .88rem; font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--gray-900); }
+    .nav-cta {
+      background: var(--blue) !important; color: var(--white) !important;
+      padding: .55rem 1.3rem; border-radius: var(--radius);
+      font-weight: 600 !important; font-size: .86rem !important;
+      transition: background .2s !important;
+    }
+    .nav-cta:hover { background: var(--blue-light) !important; color: #fff !important; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 0;
+      position: relative;
+      overflow: hidden;
+      padding-top: 68px;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      /* =====================================================
+   ACHTERGROND FOTO: vervang de regel hieronder door:
+   background-image: url('jouw-foto.jpg');
+   Zie het stappenplan in de begeleidende instructies.
+   ===================================================== */
+      background-color: #1a2a50; /* tijdelijke achtergrond – vervang dit */
+      background-size: cover; background-position: center 30%;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(10,20,60,0.72) 0%,
+        rgba(10,20,60,0.60) 45%,
+        rgba(10,20,60,0.15) 100%
+      );
+    }
+
+    /* Left: text */
+    .hero-left {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 5% 5rem 7%;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: .55rem;
+      font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+      color: #93b4f8; font-weight: 600; margin-bottom: 1.4rem;
+    }
+    .hero-eyebrow::before { content: ''; width: 24px; height: 2px; background: #93b4f8; display: inline-block; }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      font-weight: 900; line-height: 1.1; color: #fff;
+      margin-bottom: 1.4rem;
+    }
+    .hero-title em { color: #93b4f8; font-style: normal; }
+    .hero-desc {
+      color: rgba(255,255,255,.72); font-size: 1.05rem; line-height: 1.75;
+      max-width: 440px; margin-bottom: 2.5rem; font-weight: 300;
+    }
+    .hero-pills {
+      display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+    }
+    .pill {
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.9); font-size: .8rem; padding: .35rem .85rem;
+      border-radius: 99px; font-weight: 500; backdrop-filter: blur(4px);
+    }
+    .hero-stats {
+      display: flex; gap: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,.14); padding-top: 2rem;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700; color: #fff; line-height: 1;
+    }
+    .stat-num span { color: #93b4f8; }
+    .stat-lbl { font-size: .74rem; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: .1em; margin-top: .2rem; }
+
+    /* Right: form card */
+    .hero-right {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      padding: 4rem 3.5rem 4rem 2rem;
+    }
+    .quote-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 20px 60px rgba(0,0,0,.22);
+      padding: 2.2rem 2rem;
+      width: 100%; max-width: 380px;
+    }
+    .quote-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 700; color: var(--gray-900);
+      margin-bottom: .3rem;
+    }
+    .quote-card-sub { font-size: .83rem; color: var(--gray-500); margin-bottom: 1.6rem; }
+    .qform-group { margin-bottom: 1rem; }
+    .qform-group label {
+      display: block; font-size: .74rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .08em;
+      color: var(--gray-500); margin-bottom: .35rem;
+    }
+    .qform-group input,
+    .qform-group select,
+    .qform-group textarea {
+      width: 100%; padding: .65rem .85rem;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius); font-family: 'Inter', sans-serif;
+      font-size: .9rem; color: var(--gray-900); background: var(--gray-50);
+      transition: border-color .2s, background .2s; outline: none;
+    }
+    .qform-group input:focus,
+    .qform-group select:focus,
+    .qform-group textarea:focus { border-color: var(--blue); background: var(--white); }
+    .qform-group textarea { resize: vertical; min-height: 80px; }
+    .qform-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+    .qform-submit {
+      width: 100%; background: var(--blue); color: var(--white);
+      padding: .85rem; border: none; border-radius: var(--radius);
+      font-family: 'Inter', sans-serif; font-size: .95rem; font-weight: 600;
+      cursor: pointer; transition: background .2s, transform .15s;
+      margin-top: .5rem; letter-spacing: .02em;
+    }
+    .qform-submit:hover { background: var(--blue-light); transform: translateY(-1px); }
+    .qform-note { font-size: .75rem; color: var(--gray-500); text-align: center; margin-top: .7rem; }
+    .qform-success { display: none; text-align: center; padding: 2rem 1rem; }
+    .qform-success-icon { font-size: 2.5rem; margin-bottom: .8rem; }
+    .qform-success-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--blue); margin-bottom: .4rem; }
+    .qform-success-sub { font-size: .85rem; color: var(--gray-500); }
+
+    /* ── TRUST BAR ── */
+    #trust {
+      background: var(--blue);
+      padding: 1.4rem 7%;
+      display: flex; align-items: center; justify-content: center; gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: .6rem;
+      color: rgba(255,255,255,.85); font-size: .88rem; font-weight: 500;
+    }
+    .trust-item .ti { font-size: 1.2rem; }
+
+    /* ── SECTIONS SHARED ── */
+    section { padding: 5.5rem 7%; }
+    .section-label {
+      font-size: .72rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: .6rem; display: block;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+      font-weight: 700; color: var(--gray-900); line-height: 1.2;
+      margin-bottom: .9rem;
+    }
+    .section-sub { color: var(--gray-500); font-size: .97rem; line-height: 1.7; max-width: 540px; }
+
+    /* ── DIENSTEN ── */
+    #diensten { background: var(--white); }
+    .diensten-head { margin-bottom: 3rem; }
+    .diensten-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .dienst-card {
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.8rem;
+      background: var(--white);
+      transition: border-color .25s, box-shadow .25s, transform .2s;
+      position: relative; overflow: hidden;
+    }
+    .dienst-card:hover {
+      border-color: var(--blue);
+      box-shadow: 0 8px 30px rgba(26,58,143,.1);
+      transform: translateY(-3px);
+    }
+    .dienst-icon-wrap {
+      width: 48px; height: 48px; background: var(--blue-pale);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 1.2rem;
+    }
+    .dienst-title { font-weight: 700; font-size: 1.05rem; color: var(--gray-900); margin-bottom: .5rem; }
+    .dienst-desc { font-size: .88rem; color: var(--gray-500); line-height: 1.65; }
+    .dienst-badge {
+      display: inline-block; margin-top: .9rem;
+      font-size: .72rem; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--blue);
+      background: var(--blue-pale); padding: .25rem .7rem; border-radius: 99px;
+    }
+
+    /* ── WERKWIJZE ── */
+    #werkwijze { background: var(--gray-50); }
+    .stappen-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 1px; background: var(--gray-200);
+      border: 1px solid var(--gray-200); border-radius: var(--radius-lg);
+      overflow: hidden; margin-top: 3rem;
+    }
+    .stap {
+      background: var(--white); padding: 2rem 1.8rem;
+      position: relative;
+    }
+    .stap-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem; font-weight: 900;
+      color: var(--blue-pale); line-height: 1; margin-bottom: 1rem;
+    }
+    .stap-title { font-weight: 700; font-size: 1rem; color: var(--gray-900); margin-bottom: .5rem; }
+    .stap-desc { font-size: .86rem; color: var(--gray-500); line-height: 1.65; }
+    .stap::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 3px; height: 0; background: var(--blue);
+      transition: height .4s ease;
+    }
+    .stap:hover::before { height: 100%; }
+
+    /* ── OVER MIJ ── */
+    #over {
+      background: var(--white);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    }
+    .over-photo {
+      width: 100%; aspect-ratio: 4/5;
+      border-radius: var(--radius-lg); overflow: hidden;
+      background: var(--blue-pale);
+      position: relative;
+    }
+    .over-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .over-photo-fallback {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem; opacity: .3;
+    }
+    .over-badge-wrap {
+      position: absolute; bottom: -1rem; right: -1rem;
+      background: var(--blue); color: #fff;
+      width: 110px; height: 110px; border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px rgba(26,58,143,.3);
+    }
+    .over-badge-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; line-height: 1; }
+    .over-badge-lbl { font-size: .62rem; text-transform: uppercase; letter-spacing: .1em; opacity: .8; }
+    .over-text .section-title { margin-top: .4rem; }
+    .over-text p { color: var(--gray-500); font-size: .95rem; line-height: 1.75; margin-bottom: 1rem; }
+    .over-checklist { list-style: none; margin: 1.5rem 0 2rem; }
+    .over-checklist li {
+      padding: .5rem 0; border-bottom: 1px solid var(--gray-100);
+      font-size: .9rem; display: flex; align-items: center; gap: .7rem; color: var(--gray-700);
+    }
+    .over-checklist li .ck {
+      width: 20px; height: 20px; background: var(--blue); color: #fff;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: .65rem; flex-shrink: 0;
+    }
+    .btn-blue {
+      display: inline-block; background: var(--blue); color: #fff;
+      padding: .85rem 2rem; border-radius: var(--radius); font-weight: 600;
+      font-size: .93rem; text-decoration: none; transition: background .2s, transform .15s;
+    }
+    .btn-blue:hover { background: var(--blue-light); transform: translateY(-1px); }
+
+    /* ── REVIEWS ── */
+    #reviews { background: var(--gray-50); }
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(270px,1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .review-card {
+      background: var(--white); border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-lg); padding: 1.8rem;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .review-card:hover { box-shadow: 0 10px 35px rgba(26,58,143,.09); transform: translateY(-3px); }
+    .review-stars { color: var(--blue); font-size: .95rem; margin-bottom: .9rem; letter-spacing: .05em; }
+    .review-text { font-size: .91rem; line-height: 1.7; color: var(--gray-500); margin-bottom: 1.2rem; font-style: italic; }
+    .review-author { font-weight: 700; font-size: .88rem; color: var(--gray-900); }
+    .review-place { font-size: .8rem; color: var(--gray-500); }
+
+    /* ── PROJECTEN ── */
+    #projecten { background: var(--white); }
+    .projecten-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1rem; margin-top: 3rem;
+    }
+    .project-item {
+      aspect-ratio: 4/3; border-radius: var(--radius);
+      background: var(--blue-pale); position: relative; overflow: hidden;
+      cursor: pointer; border: 1.5px solid var(--gray-200);
+    }
+    .project-item:nth-child(1) { background: linear-gradient(135deg, #dde8fb, #c5d8f8); }
+    .project-item:nth-child(2) { background: linear-gradient(135deg, #c8d9f7, #b5caf5); }
+    .project-item:nth-child(3) { background: linear-gradient(135deg, #d5e2f9, #bfcff6); }
+    .project-item:nth-child(4) { background: linear-gradient(135deg, #cad9f8, #b8cbf7); }
+    .project-item:nth-child(5) { background: linear-gradient(135deg, #dce7fb, #c2d5f7); }
+    .project-item:nth-child(6) { background: linear-gradient(135deg, #d0def9, #bdcff7); }
+    .project-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,58,143,.8) 0%, transparent 55%);
+      opacity: 0; transition: opacity .3s;
+      display: flex; align-items: flex-end; padding: 1rem;
+      border-radius: var(--radius);
+    }
+    .project-item:hover .project-overlay { opacity: 1; }
+    .project-label { font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #fff; }
+    .project-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 2.5rem; opacity: .3; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--gray-50); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 3rem; align-items: start; }
+    .contact-details-list { list-style: none; }
+    .contact-details-list li {
+      display: flex; align-items: center; gap: .8rem;
+      padding: .8rem 0; border-bottom: 1px solid var(--gray-200);
+      font-size: .92rem; color: var(--gray-700);
+    }
+    .contact-details-list a { color: var(--gray-700); text-decoration: none; }
+    .contact-details-list a:hover { color: var(--blue); }
+    .contact-form-box {
+      background: var(--white); border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-lg); padding: 2.2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.05);
+    }
+    .cform-group { margin-bottom: 1rem; }
+    .cform-group label { display: block; font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--gray-500); margin-bottom: .35rem; }
+    .cform-group input, .cform-group select, .cform-group textarea {
+      width: 100%; padding: .7rem .9rem;
+      border: 1.5px solid var(--gray-200); border-radius: var(--radius);
+      font-family: 'Inter', sans-serif; font-size: .9rem; color: var(--gray-900);
+      background: var(--gray-50); transition: border-color .2s; outline: none;
+    }
+    .cform-group input:focus, .cform-group select:focus, .cform-group textarea:focus { border-color: var(--blue); background: var(--white); }
+    .cform-group textarea { resize: vertical; min-height: 110px; }
+    .cform-row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+    .cform-submit { width: 100%; background: var(--blue); color: #fff; padding: .9rem; border: none; border-radius: var(--radius); font-family: 'Inter', sans-serif; font-size: .95rem; font-weight: 600; cursor: pointer; transition: background .2s; margin-top: .3rem; }
+    .cform-submit:hover { background: var(--blue-light); }
+    .cform-note { font-size: .75rem; color: var(--gray-500); text-align: center; margin-top: .6rem; }
+    .cform-success { display: none; text-align: center; padding: 2rem; color: var(--blue); font-family: 'Playfair Display', serif; font-size: 1.15rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--gray-900); color: rgba(255,255,255,.5);
+      padding: 2.2rem 7%;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; color: #fff; font-size: 1rem; }
+    .footer-logo span { color: #93b4f8; }
+    footer small { font-size: .8rem; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    .fade-up { opacity:0; animation: fadeUp .65s ease forwards; }
+    .d1 { animation-delay:.1s; } .d2 { animation-delay:.22s; }
+    .d3 { animation-delay:.34s; } .d4 { animation-delay:.46s; } .d5 { animation-delay:.58s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1000px) {
+      #hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      #over, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .projecten-grid { grid-template-columns: repeat(2,1fr); }
+      .stappen-grid { grid-template-columns: 1fr 1fr; }
+      nav .nav-links { display: none; }
+    }
+    @media (max-width: 580px) {
+      section { padding: 4rem 5%; }
+      .projecten-grid { grid-template-columns: 1fr; }
+      .qform-row, .cform-row { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+      #trust { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">P. Busselaar <span>Timmerman</span></a>
+  <ul class="nav-links">
+    <li><a href="#diensten">Diensten</a></li>
+    <li><a href="#over">Over mij</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#projecten">Projecten</a></li>
+    <li><a href="#contact" class="nav-cta">Offerte aanvragen</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+
+  <!-- Left: pitch -->
+  <div class="hero-left">
+    <span class="hero-eyebrow fade-up">Vakman · Zoetermeer &amp; omgeving</span>
+    <h1 class="hero-title fade-up d1">
+      Renovaties die<br><em>écht het verschil</em><br>maken
+    </h1>
+    <p class="hero-desc fade-up d2">
+      Van complete badkamerrenovatie tot zolderverbouwing. P. Busselaar levert vakmanschap met 30 jaar ervaring – netjes, betrouwbaar en eerlijk geprijsd.
+    </p>
+    <div class="hero-pills fade-up d3">
+      <span class="pill">🛁 Badkamer &amp; toilet</span>
+      <span class="pill">🏠 Zolderverbouwing</span>
+      <span class="pill">🔨 Binnenrenovaties</span>
+    </div>
+    <div class="hero-stats fade-up d4">
+      <div><div class="stat-num">30<span>+</span></div><div class="stat-lbl">Jaar ervaring</div></div>
+      <div><div class="stat-num">200<span>+</span></div><div class="stat-lbl">Projecten</div></div>
+      <div><div class="stat-num">100<span>%</span></div><div class="stat-lbl">Eigen uitvoering</div></div>
+    </div>
+  </div>
+
+  <!-- Right: quote form -->
+  <div class="hero-right fade-up d5">
+    <div class="quote-card">
+      <div class="quote-card-title">Vrijblijvende offerte</div>
+      <div class="quote-card-sub">Reactie binnen 1 werkdag · Geen verplichtingen</div>
+
+      <div id="qFormFields">
+        <div class="qform-row">
+          <div class="qform-group"><label>Voornaam</label><input type="text" placeholder="Jan" /></div>
+          <div class="qform-group"><label>Achternaam</label><input type="text" placeholder="de Groot" /></div>
+        </div>
+        <div class="qform-group"><label>Telefoonnummer</label><input type="tel" placeholder="06 – 12 345 678" /></div>
+        <div class="qform-group"><label>E-mailadres</label><input type="email" placeholder="jan@email.nl" /></div>
+        <div class="qform-group">
+          <label>Type klus</label>
+          <select>
+            <option value="">Selecteer een dienst</option>
+            <option>Badkamerrenovatie</option>
+            <option>Zolderverbouwing</option>
+            <option>Toilet &amp; sanitair</option>
+            <option>Binnenrenovatie</option>
+            <option>Kozijnen &amp; deuren</option>
+            <option>Anders / overleg gewenst</option>
+          </select>
+        </div>
+        <div class="qform-group"><label>Korte omschrijving</label><textarea placeholder="Wat wilt u laten verbouwen? Hoe meer details, hoe beter ik u kan adviseren..."></textarea></div>
+        <button class="qform-submit" onclick="submitHeroForm()">Offerte aanvragen →</button>
+        <p class="qform-note">🔒 Uw gegevens worden nooit gedeeld met derden</p>
+      </div>
+
+      <div id="qFormSuccess" class="qform-success">
+        <div class="qform-success-icon">✅</div>
+        <div class="qform-success-title">Aanvraag ontvangen!</div>
+        <div class="qform-success-sub">Ik neem binnen 1 werkdag contact met u op.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div id="trust">
+  <div class="trust-item"><span class="ti">✅</span> 30 jaar vakervaring</div>
+  <div class="trust-item"><span class="ti">🔨</span> Altijd eigen uitvoering</div>
+  <div class="trust-item"><span class="ti">📋</span> Ingeschreven KvK</div>
+  <div class="trust-item"><span class="ti">💬</span> Reactie binnen 1 werkdag</div>
+  <div class="trust-item"><span class="ti">⭐</span> Beoordeeld met 5 sterren</div>
+</div>
+
+<!-- DIENSTEN -->
+<section id="diensten">
+  <div class="diensten-head">
+    <span class="section-label">Wat ik voor u doe</span>
+    <h2 class="section-title">Specialisaties &amp; diensten</h2>
+    <p class="section-sub">Ik focus op verbouwingen die uw woning écht verbeteren – meer wooncomfort, meer ruimte, meer waarde.</p>
+  </div>
+  <div class="diensten-grid">
+    <div class="dienst-card">
+      <div class="dienst-icon-wrap">🛁</div>
+      <div class="dienst-title">Badkamerrenovatie</div>
+      <p class="dienst-desc">Complete renovatie van uw badkamer: van sloopwerk en leidingwerk tot wanden, sanitair en tegelwerk.</p>
+      <span class="dienst-badge">Meest gevraagd</span>
+    </div>
+    <div class="dienst-card">
+      <div class="dienst-icon-wrap">🚿</div>
+      <div class="dienst-title">Toilet &amp; sanitair</div>
+      <p class="dienst-desc">Vervanging of aanleg van een nieuw toilet. Van eenvoudige vernieuwing tot volledige herinrichting.</p>
+    </div>
+    <div class="dienst-card">
+      <div class="dienst-icon-wrap">🏠</div>
+      <div class="dienst-title">Zolderverbouwing</div>
+      <p class="dienst-desc">Extra slaapkamer, thuiskantoor of bergruimte. Uw zolder optimaal benut, degelijk uitgevoerd.</p>
+      <span class="dienst-badge">Grote meerwaarde</span>
+    </div>
+    <div class="dienst-card">
+      <div class="dienst-icon-wrap">🔨</div>
+      <div class="dienst-title">Binnenrenovaties</div>
+      <p class="dienst-desc">Wanden verplaatsen, vloeren leggen, deuren plaatsen of een complete verbouwing van uw woonruimte.</p>
+    </div>
+    <div class="dienst-card">
+      <div class="dienst-icon-wrap">🪟</div>
+      <div class="dienst-title">Kozijnen &amp; deuren</div>
+      <p class="dienst-desc">Vervanging of plaatsing van kozijnen, binnendeuren en deurframes. Netjes afgewerkt, passend bij uw interieur.</p>
+    </div>
+    <div class="dienst-card">
+      <div class="dienst-icon-wrap">📐</div>
+      <div class="dienst-title">Maatwerk &amp; advies</div>
+      <p class="dienst-desc">Met 30 jaar vakkennis denk ik graag mee. Eerlijk advies over haalbaarheid, kosten en de beste aanpak.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WERKWIJZE -->
+<section id="werkwijze">
+  <span class="section-label">Hoe ik werk</span>
+  <h2 class="section-title">Van eerste contact tot oplevering</h2>
+  <p class="section-sub">Duidelijke communicatie en betrouwbare afspraken staan voorop. Geen verrassingen achteraf.</p>
+  <div class="stappen-grid">
+    <div class="stap"><div class="stap-num">01</div><div class="stap-title">Kennismaking</div><p class="stap-desc">U vult het formulier in. Ik neem binnen één werkdag contact op voor een gesprek over uw wensen.</p></div>
+    <div class="stap"><div class="stap-num">02</div><div class="stap-title">Opname &amp; offerte</div><p class="stap-desc">Ik kom vrijblijvend langs, bekijk de situatie en stel een heldere, gespecificeerde offerte op.</p></div>
+    <div class="stap"><div class="stap-num">03</div><div class="stap-title">Uitvoering</div><p class="stap-desc">Na akkoord plannen we het werk in. Alles voer ik zelf uit: vakkundig en binnen de afgesproken termijn.</p></div>
+    <div class="stap"><div class="stap-num">04</div><div class="stap-title">Oplevering</div><p class="stap-desc">We lopen het werk samen door. Pas als u tevreden bent is de klus klaar. Altijd service achteraf.</p></div>
+  </div>
+</section>
+
+<!-- OVER MIJ -->
+<section id="over">
+  <div class="over-photo">
+    <div class="over-photo-fallback">👷</div>
+    <div class="over-badge-wrap">
+      <span class="over-badge-num">30</span>
+      <span class="over-badge-lbl">jaar ervaring</span>
+    </div>
+  </div>
+  <div class="over-text">
+    <span class="section-label">Over de vakman</span>
+    <h2 class="section-title">P. Busselaar – Timmerman &amp; renovatiespecialist</h2>
+    <p>Al ruim dertig jaar lever ik kwalitatief timmerwerk en renovaties in woonhuizen. Honderden badkamers, zolders en woonruimtes getransformeerd – altijd met hetzelfde doel: een resultaat waar u trots op bent.</p>
+    <p>Als zelfstandig vakman doe ik alles zelf. Geen onderaannemers of onbekende gezichten. U weet altijd wie er in uw huis werkt en u kunt mij direct aanspreken.</p>
+    <ul class="over-checklist">
+      <li><span class="ck">✓</span> Gespecialiseerd in badkamer- en zolderrenovaties</li>
+      <li><span class="ck">✓</span> Werkzaam in Zoetermeer en omliggende gemeenten</li>
+      <li><span class="ck">✓</span> Ingeschreven bij de Kamer van Koophandel</li>
+      <li><span class="ck">✓</span> Eerlijke prijs-kwaliteitsverhouding</li>
+      <li><span class="ck">✓</span> Persoonlijk aanspreekpunt van begin tot einde</li>
+    </ul>
+    <a href="#contact" class="btn-blue">Neem contact op</a>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <span class="section-label">Klantbeoordelingen</span>
+  <h2 class="section-title">Wat klanten zeggen</h2>
+  <p class="section-sub">Tevreden klanten zijn de beste referentie.</p>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Busselaar heeft onze complete badkamer gerenoveerd. Het resultaat is geweldig – netjes werk, altijd op tijd en een eerlijke prijs. Heel blij met het eindresultaat."</p>
+      <div class="review-author">Familie de Groot</div>
+      <div class="review-place">Zoetermeer</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Onze zolder verbouwd tot twee slaapkamers. Busselaar dacht goed mee in de planning en voerde alles keurig uit. Echt een vakman die zijn werk kent."</p>
+      <div class="review-author">M. van der Berg</div>
+      <div class="review-place">Leidschendam</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Betrouwbaar, nauwkeurig en eerlijk. Nieuw toilet geplaatst en wanden netjes afgewerkt. We zouden hem zeker opnieuw inschakelen."</p>
+      <div class="review-author">R. Jansen</div>
+      <div class="review-place">Voorburg</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTEN -->
+<section id="projecten">
+  <span class="section-label">Recente projecten</span>
+  <h2 class="section-title">Uitgevoerd werk</h2>
+  <p class="section-sub">Een selectie van recent opgeleverde renovaties. Voeg uw eigen foto's toe voor maximaal resultaat.</p>
+  <div class="projecten-grid">
+    <div class="project-item" style="background-image:url('https://images.unsplash.com/photo-1696987007764-7f8b85dd3033?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size:cover; background-position:center;">
+      <div class="project-overlay"><span class="project-label">Badkamerrenovatie · Zoetermeer</span></div>
+    </div>
+    <div class="project-item" style="background-image:url('https://images.unsplash.com/photo-1609280069904-ab36feb3f20c?q=80&w=654&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size:cover; background-position:center;">
+      <div class="project-overlay"><span class="project-label">Badkamer nieuwbouw · Rijswijk</span></div>
+    </div>
+    <div class="project-item" style="background-image:url('https://verbouwingdirect.nl/wp-content/uploads/2021/02/zolder-verbouwen-img2@05x.jpg?1772548077'); background-size:cover; background-position:center;">
+      <div class="project-overlay"><span class="project-label">Zolderverbouwing · Leidschendam</span></div>
+    </div>
+    <div class="project-item" style="background-image:url('https://www.bouwmaat.nl/alles/app/uploads/2023/01/zolderverbouwing-header.jpg'); background-size:cover; background-position:center;">
+      <div class="project-overlay"><span class="project-label">Zolderverbouwing · Delft</span></div>
+    </div>
+    <div class="project-item" style="background-image:url('https://93lines.be/wp-content/uploads/2024/12/4P1A3226-1-1024x683.webp'); background-size:cover; background-position:center;">
+      <div class="project-overlay"><span class="project-label">Interieurverbouwing · Zoetermeer</span></div>
+    </div>
+    <div class="project-item" style="background-image:url('https://b1240578.smushcdn.com/1240578/wp-content/uploads/Dakserre-zolder-1024x683.jpg?lossy=2&strip=1&webp=1'); background-size:cover; background-position:center;">
+      <div class="project-overlay"><span class="project-label">Kozijnen &amp; wanden · Voorburg</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <span class="section-label">Contact</span>
+  <h2 class="section-title">Vraag een offerte aan</h2>
+  <p class="section-sub">Vrijblijvend contact opnemen kan ook via telefoon of e-mail.</p>
+  <div class="contact-grid">
+    <div>
+      <ul class="contact-details-list">
+        <li>📍 Zoetermeer &amp; omgeving</li>
+        <li>📞 <a href="tel:+31600000000">06 – 00 000 000</a></li>
+        <li>✉️ <a href="/cdn-cgi/l/email-protection#50393e363f1032252323353c3131227d24393d3d35223d313e7e3e3c"><span class="__cf_email__" data-cfemail="50393e363f1032252323353c3131227d24393d3d35223d313e7e3e3c">[email&#160;protected]</span></a></li>
+        <li>🏢 KVK: 00000000</li>
+        <li>🕐 Bereikbaar ma–vr, 07:00–17:00</li>
+      </ul>
+    </div>
+    <div class="contact-form-box">
+      <div id="cFormSuccess" class="cform-success">✅ Bedankt! Ik neem spoedig contact met u op.</div>
+      <div id="cFormFields">
+        <div class="cform-row">
+          <div class="cform-group"><label>Voornaam</label><input type="text" placeholder="Jan" /></div>
+          <div class="cform-group"><label>Achternaam</label><input type="text" placeholder="de Groot" /></div>
+        </div>
+        <div class="cform-group"><label>E-mailadres</label><input type="email" placeholder="jan@email.nl" /></div>
+        <div class="cform-group"><label>Telefoonnummer</label><input type="tel" placeholder="06 – 12 345 678" /></div>
+        <div class="cform-group">
+          <label>Type klus</label>
+          <select>
+            <option value="">Selecteer een dienst</option>
+            <option>Badkamerrenovatie</option>
+            <option>Zolderverbouwing</option>
+            <option>Toilet &amp; sanitair</option>
+            <option>Binnenrenovatie</option>
+            <option>Kozijnen &amp; deuren</option>
+            <option>Anders / overleg gewenst</option>
+          </select>
+        </div>
+        <div class="cform-group"><label>Omschrijving</label><textarea placeholder="Wat wilt u laten verbouwen?"></textarea></div>
+        <button class="cform-submit" onclick="submitContactForm()">Offerte aanvragen →</button>
+        <p class="cform-note">Vrijblijvend · Reactie binnen 1 werkdag</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">P. Busselaar <span>· Timmerman</span></div>
+  <small>© 2025 P. Busselaar – Vakman met 30 jaar ervaring</small>
+  <small>KVK: 00000000</small>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  function submitHeroForm() {
+    document.getElementById('qFormFields').style.display = 'none';
+    document.getElementById('qFormSuccess').style.display = 'block';
+  }
+  function submitContactForm() {
+    document.getElementById('cFormFields').style.display = 'none';
+    document.getElementById('cFormSuccess').style.display = 'block';
+  }
+
+  // Scroll-triggered fade-in
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll(
